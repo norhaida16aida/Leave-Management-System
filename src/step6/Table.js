@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Table} from 'react-bootstrap'
 
 const TableHeader = () => {
     return (
@@ -33,20 +34,23 @@ const TableBody = ({cd, rc}) => {
     );
 }
 
-class Table extends Component {
+class ListTable extends Component {
     render() {
         const {characterData, removeCharacter} = this.props;
 
         return (
-            <table>
-                <TableHeader/>
-                <TableBody
-                    cd={characterData}
-                    rc={removeCharacter}
-                />
-            </table>
+            <div className="container">
+
+                <Table striped bordered condensed hover>
+                    <TableHeader/>
+                    <TableBody
+                        cd={characterData}
+                        rc={removeCharacter}
+                    />
+                </Table>
+            </div>
         );
     }
 }
 
-export default Table;
+export default ListTable;
