@@ -99,7 +99,7 @@ Step 6
 - copy Form, Table into `step6/` folder
 
 ```bash
-
+git remote -v
 ```
 
 Step 7
