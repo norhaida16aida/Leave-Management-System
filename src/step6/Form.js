@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
+import {Button, Checkbox, Radio, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
+//import {Redirect} from 'react-router-dom'
+import LeaveCalendar from '../step7/Calendar'
 
 class Form extends Component {
     constructor(props) {
         super(props);
-
-        this.initialState = {
-            name: '',
-            job: ''
-        };
-
-        this.state = this.initialState;
+        this.state = {name: ''};
     }
 
     handleChange = event => {
@@ -33,27 +30,73 @@ class Form extends Component {
     }
 
     render() {
-        const {name, job} = this.state;
-
         return (
+            <div className="container">
             <form>
-                <label>Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    onChange={this.handleChange}/>
-                <label>Job</label>
-                <input
-                    type="text"
-                    name="job"
-                    value={job}
-                    onChange={this.handleChange}/>
-                <input
-                    type="button"
-                    value="Submit"
-                    onClick={this.submitForm}/>
+
+                <FormGroup controlId="checkbox">
+                    <Checkbox inline defaultChecked>Checkbox 1</Checkbox>
+                    <Checkbox inline>Checkbox 2</Checkbox>
+                    <Checkbox inline>Checkbox 3</Checkbox>
+                </FormGroup>
+
+                <FormGroup controlId="radio">
+                    <Radio name="radioGroup" inline>
+                        RadioGroup 1
+                    </Radio>{' '}
+                    <Radio name="radioGroup" inline>
+                        RadioGroup 2
+                    </Radio>{' '}
+                    <Radio name="radioGroup" inline>
+                        RadioGroup 3
+                    </Radio>
+                </FormGroup>
+
+                <FormGroup controlId="select">
+                    <ControlLabel>Select</ControlLabel>
+                    <FormControl componentClass="select" placeholder="select">
+                        <option value="select">-- select --</option>
+                        <option value="other">Reason 1</option>
+                        <option value="other">Reason 2</option>
+                        <option value="other">Reason 3</option>
+                    </FormControl>
+                </FormGroup>
+
+                <FormGroup controlId="textarea">
+                    <ControlLabel>Describe</ControlLabel>
+                    <FormControl componentClass="textarea" placeholder="reason for on-leave"/>
+                </FormGroup>
+
+                <FormGroup controlId="text" bsSize="large">
+                    <ControlLabel>Name</ControlLabel>
+                    <FormControl
+                        type="text"
+                        value={this.state.name}
+                        placeholder="name"
+                        onChange={this.handleChange}
+                    ></FormControl>
+                </FormGroup>
+
+                <FormGroup controlId="from_date">
+                    <ControlLabel>From</ControlLabel>
+                    <LeaveCalendar/>
+                </FormGroup>
+
+                <FormGroup controlId="to_date">
+                    <ControlLabel>To</ControlLabel>
+                    <LeaveCalendar/>
+                </FormGroup>
+
+                <Button
+                    bsStyle="primary"
+                    bsSize="large"
+                    type="submit"
+                    onClick={this.submitForm}>
+                    Submit
+                </Button>
+
             </form>
+            </div>
         );
     }
 }
