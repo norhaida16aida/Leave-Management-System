@@ -99,7 +99,16 @@ Step 6
 - copy Form, Table into `step6/` folder
 
 ```bash
+git remote add stream https://github.com/jxjwilliam/react-training-assignment.git
+git checkout -b step6
+git pull stream step6
+```
 
+to fix conflicts:
+
+```bash
+git checkout stream/step6 -- package.json src/index.js
+git diff stream/step6 --name-only
 ```
 
 Step 7
