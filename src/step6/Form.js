@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Calendar from 'react-calendar'
 
 class Form extends Component {
     constructor(props) {
@@ -49,6 +50,7 @@ class Form extends Component {
                     name="job"
                     value={job}
                     onChange={this.handleChange}/>
+                    <Calendar/>
                 <input
                     type="button"
                     value="Submit"
