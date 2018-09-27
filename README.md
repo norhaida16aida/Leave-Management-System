@@ -62,7 +62,7 @@ add simplest redux
 ```bash
 git checkout -b step3
 //create folder src/step3
-//create js src/step3/App.js
+//create js src/step3/App1.js
 
 npm install --save redux react-redux prop-types
 //or:

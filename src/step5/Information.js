@@ -1,23 +1,36 @@
 import React, {Component} from 'react';
 import {Route, Link} from 'react-router-dom'
-import Form from '../step6/Form'
-import Table from '../step6/Table'
+import RequestForm from '../step6/RequestForm'
+import ListTable from '../step6/ListTable'
 
 class Information extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            characters: [
-                {name: 'Hello world', 'job': "William Jiang"}
+            requests: [
+                {
+                    name: 'Chinasoft Employee',
+                    fDate: new Date().toDateString(),
+                    tDate: new Date().toDateString(),
+                    reason: 'Medical check',
+                    status: 'Approved'
+                },
+                {
+                    name: 'HSBC Employee',
+                    fDate: new Date().toDateString(),
+                    tDate: new Date().toDateString(),
+                    reason: 'Technical Training',
+                    status: 'Not Approved'
+                }
             ]
         };
     }
 
-    removeCharacter = index => {
-        const {characters} = this.state;
+    removeRequest = index => {
+        const {requests} = this.state;
 
         this.setState({
-            characters: characters.filter((character, i) => {
+            requests: requests.filter((character, i) => {
                 return i !== index;
             })
         });
@@ -25,7 +38,7 @@ class Information extends Component {
 
     handleSubmit = character => {
         if (character) {
-            this.setState({characters: [...this.state.characters, character]});
+            this.setState({requests: [...this.state.requests, character]});
         }
     };
 
@@ -34,16 +47,16 @@ class Information extends Component {
         return (
             <div>
                 <div>
-                    <Link to={`${match.url}/request`}>Request</Link>&nbsp;|&nbsp;
+                    <Link to={`${match.url}/request`}>On Leave Request</Link>&nbsp;|&nbsp;
                     <Link to={`${match.url}/list`}>List</Link>
                 </div>
-                <Route path={`${match.url}/request`} component={Form}/>
+                <Route path={`${match.url}/request`} component={RequestForm}/>
                 <Route
                     path={`${match.url}/list`}
                     render={(routeProps) => (
-                        <Table
-                            characterData={this.state.characters}
-                            removeCharacter={this.removeCharacter}
+                        <ListTable
+                            requests={this.state.requests}
+                            removeRequest={this.removeRequest}
                             {...routeProps}
                         />
                     )}

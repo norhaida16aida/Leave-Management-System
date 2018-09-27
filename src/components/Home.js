@@ -21,10 +21,10 @@ class Home extends Component {
     render() {
         const {referrer} = this.state;
         if (/Leave/i.test(referrer)) {
-            return <Redirect to="/login"/>
+            return <Redirect to="/generallogin"/>
         }
         else if (/Admin/i.test(referrer)) {
-            return <Redirect to="/admin"/>
+            return <Redirect to="/adminlogin"/>
         }
         return (
             <div className="well" style={wellStyles}>
