@@ -10,7 +10,7 @@ class Form extends Component {
     }
 
     handleChange = event => {
-        const {name, value} = event.target;
+        const {name, value, startdate} = event.target;
 
         if (value) {
             this.setState({
@@ -56,9 +56,9 @@ class Form extends Component {
                     <ControlLabel>Select</ControlLabel>
                     <FormControl componentClass="select" placeholder="select">
                         <option value="select">-- select --</option>
-                        <option value="other">Reason 1</option>
-                        <option value="other">Reason 2</option>
-                        <option value="other">Reason 3</option>
+                        <option value="other">Annual Leave</option>
+                        <option value="other">Sick Leave</option>
+                        <option value="other">Marriage Leave</option>
                     </FormControl>
                 </FormGroup>
 
@@ -73,6 +73,16 @@ class Form extends Component {
                         type="text"
                         value={this.state.name}
                         placeholder="name"
+                        onChange={this.handleChange}
+                    ></FormControl>
+                </FormGroup>
+
+                <FormGroup controlId="text" bsSize="large">
+                    <ControlLabel>Start Date</ControlLabel>
+                    <FormControl
+                        type="date"
+                        value={this.state.startdate}
+                        placeholder="startdate"
                         onChange={this.handleChange}
                     ></FormControl>
                 </FormGroup>
