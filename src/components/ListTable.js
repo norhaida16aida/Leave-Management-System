@@ -19,7 +19,7 @@ const TableHeader = ({isAdmin}) => {
 
 const TableBody = (props) => {
 
-    const {rs, rr, handleShow, handleHide, isAdmin} = props;
+    const {rs, rr, handleShow, isAdmin} = props;
     const rows = rs.map((row, index) => {
         return (
             <tr key={index}>

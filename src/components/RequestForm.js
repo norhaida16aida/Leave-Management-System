@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Checkbox, Radio, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 //import {Redirect} from 'react-router-dom'
-import LeaveCalendar from '../step7/Calendar'
+import LeaveCalendar from './Calendar'
 
 class RequestForm extends Component {
     constructor(props) {

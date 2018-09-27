@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import {createStore} from 'redux';
-import {Provider, connect} from 'react-redux';
+import {Provider} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -15,10 +15,10 @@ import Home from './components/Home'
 import Navigator from './components/Navigator'
 import Footer from './components/Footer'
 import NotFound from './components/NotFound'
-import S5 from './step5/';
+import S5 from './containers/';
 import ListTable from './components/ListTable'
 import RequestForm from './components/RequestForm'
-import Data from './step7/Data'
+import Data from './data/Requests'
 
 import registerServiceWorker from './registerServiceWorker';
 const removeRequest = index => {
@@ -68,7 +68,6 @@ function reducer(state = {}, action) {
         default:
             return 'no data saved.'
     }
-    return 'walk through reducer'
 }
 
 const store = createStore(reducer);
