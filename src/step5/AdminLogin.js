@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Redirect} from 'react-router-dom'
-import './Admin.css'
+import './AdminLogin.css'
 
 export default class Admin extends Component {
     constructor(props) {
@@ -12,8 +12,8 @@ export default class Admin extends Component {
         };
     }
 
-    getAccessToken = () => {
-        fetch('/api/account/signin', {
+    fetchData() {
+        fetch('/api/on_leave/admin_login', {
             method: 'POST',
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(this.state)
@@ -24,12 +24,15 @@ export default class Admin extends Component {
                 this.setState({token});
                 sessionStorage.setItem('token', token)
             })
+            .catch(e => {
+                throw new Error(e);
+            })
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.setState({fireRedirect: true})
-        //this.getAccessToken();
+        console.log(JSON.stringify(this.state));
     }
 
     handleChange = e => {
@@ -40,9 +43,8 @@ export default class Admin extends Component {
 
     render() {
         const {email, password, fireRedirect} = this.state;
-
         if (fireRedirect) {
-            return <Redirect to="/info"/>
+            return <Redirect to="/list"/>
         }
 
         return (
@@ -56,8 +58,8 @@ export default class Admin extends Component {
                            placeholder="Email"
                            required=""
                            autoFocus="" onChange={this.handleChange}/>
-                    <label htmlFor="password1" className="sr-only">Password:</label>
-                    <input type="password" id="password1" name="password" value={password} className="form-control"
+                    <label htmlFor="password" className="sr-only">Password:</label>
+                    <input type="password" id="password" name="password" value={password} className="form-control"
                            placeholder="Password"
                            required="" onChange={this.handleChange}/>
                     <div className="checkbox mb-3">
@@ -65,7 +67,7 @@ export default class Admin extends Component {
                             <input type="checkbox" value="remember-me"/> Remember me
                         </label>
                     </div>
-                    <button className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                    <button className="btn btn-lg btn-primary btn-block" type="submit">Admin Login</button>
                 </form>
             </div>
         )

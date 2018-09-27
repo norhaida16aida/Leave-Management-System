@@ -1,11 +1,9 @@
-import Home from './Home';
-import Login from './Login';
-import Admin from './Admin'
+import GeneralLogin from './GeneralLogin';
+import AdminLogin from './AdminLogin'
 import Information from './Information'
 
 export default {
-    Home,
-    Login,
-    Admin,
+    GeneralLogin,
+    AdminLogin,
     Information
 }

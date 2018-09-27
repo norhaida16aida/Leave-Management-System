@@ -14,14 +14,14 @@ const Navigator = () => (
                     <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/login">Login</Link>
+                    <Link className="nav-link" to="/generallogin">General Login</Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/admin">Admin</Link>
+                    <Link className="nav-link" to="/adminlogin">Admin Login</Link>
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/info">Information</Link>
-                </li>
+                {/*<li className="nav-item">*/}
+                {/*<Link className="nav-link" to="/info">Information</Link>*/}
+                {/*</li>*/}
             </ul>
         </div>
     </nav>

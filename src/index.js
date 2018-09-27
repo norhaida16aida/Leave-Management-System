@@ -6,19 +6,19 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import logo from './chinasofti_logo.png';
 import './App.css';
-import Navigator from './step6/Navigator'
-import Footer from './step6/Footer'
+import './index.css';
+import Home from './components/Home'
+import Navigator from './components/Navigator'
+import Footer from './components/Footer'
+import NotFound from './components/NotFound'
+import S5 from './step5/';
+import ListTable from './step6/ListTable'
+import RequestForm from './step6/RequestForm'
+import Data from './step7/Data'
 
 import registerServiceWorker from './registerServiceWorker';
-
-import './index.css';
-import S5 from './step5/';
-
-const NotFound = ({location}) => (
-    <h3 className="alert-danger alert-primary">
-        No match for <code>{location.pathname}</code>
-    </h3>
-)
+const removeRequest = index => {
+};
 
 const App = () => (
     <Router>
@@ -29,13 +29,24 @@ const App = () => (
                 <Navigator/>
             </header>
             <Switch>
-                <Route exact path="/" component={S5.Home}/>
-                <Route path="/login" component={S5.Login}/>
-                <Route path="/admin" component={S5.Admin}/>
+                <Route exact path="/" component={Home}/>
+                <Route path="/generallogin" component={S5.GeneralLogin}/>
+                <Route path="/adminlogin" component={S5.AdminLogin}/>
                 <Route path="/info" component={S5.Information}/>
+                <Route path="/list"
+                       render={(routeProps) => (
+                           <ListTable
+                               requests={Data.requests}
+                               removeRequest={removeRequest}
+                               isAdmin="true"
+                               {...routeProps}
+                           />
+                       )}
+                />
+                <Route path="/request" component={RequestForm}/>
                 <Route component={NotFound}/>
             </Switch>
-        <hr/>
+            <hr/>
             <Footer/>
         </div>
     </Router>
@@ -44,7 +55,8 @@ const App = () => (
 ReactDOM.render(
     <div>
         <App/>
-    </div>,
+    </div>
+    ,
     document.getElementById('root')
 )
 

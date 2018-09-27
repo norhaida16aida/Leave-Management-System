@@ -1,18 +1,16 @@
 import React, {Component} from "react";
 import {Button, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import {Redirect} from 'react-router-dom'
-import "./Login.css";
+import "./GeneralLogin.css";
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             email: "",
             password: "",
             fireRedirect: false
         };
-
     }
 
     validateForm() {
@@ -25,10 +23,26 @@ export default class Login extends Component {
         });
     }
 
+    fetchData() {
+        fetch('/api/on_leave/customer_login', {
+            method: 'POST',
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify(this.state)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('data:', data)
+            })
+            .catch(e => {
+                throw new Error(e);
+            })
+    }
+
     handleSubmit = event => {
         event.preventDefault();
-        this.setState({fireRedirect: true})
+        this.setState({fireRedirect: true});
         //Not work: return <Redirect to="/info"/>
+        console.log(JSON.stringify(this.state));
     }
 
     render() {
@@ -62,7 +76,7 @@ export default class Login extends Component {
                             disabled={!this.validateForm()}
                             type="submit"
                         >
-                            Login
+                            General Login
                         </Button>
                     </form>
                 </div>
