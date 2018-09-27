@@ -52,6 +52,7 @@ class GeneralLogin extends Component {
             <div>
                 {fireRedirect && (<Redirect to="/info"/>)}
                 <div className="Login">
+                    <h1>General User Login</h1>
                     <form onSubmit={this.handleSubmit}>
                         <FormGroup controlId="email" bsSize="large">
                             <ControlLabel>Email</ControlLabel>

@@ -53,7 +53,6 @@ class AdminLogin extends Component {
                 <h1>Admin Approval Panel</h1>
                 <form className="form-signin" onSubmit={this.handleSubmit} id="signin" name="signin"
                       ref={el => this.form = el}>
-                    <h1 className="h3 mb-3 font-weight-normal">Admin Login</h1>
                     <label htmlFor="email1" className="sr-only">Email</label>
                     <input type="email" id="email1" name="email" value={email} className="form-control"
                            placeholder="Email"

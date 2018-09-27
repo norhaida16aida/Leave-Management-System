@@ -2,7 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
-import {createStore} from 'redux';
+import {createStore, compose, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk'
+import {createLogger} from 'redux-logger'
+import {devToolsEnhancer} from 'redux-devtools-extension';
+
 import rootReducer from './reducers/'
 import {Provider} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -60,7 +64,11 @@ App.propTypes = {
     projectName: PropTypes.string
 }
 
-const store = createStore(rootReducer);
+const middlewares = [thunk, createLogger()];
+const store = createStore(
+    rootReducer,
+    compose(applyMiddleware(...middlewares), devToolsEnhancer())
+);
 
 ReactDOM.render(
     <Provider store={store}>
