@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import {createStore} from 'redux';
+import rootReducer from './reducers/'
 import {Provider} from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -18,7 +19,7 @@ import NotFound from './components/NotFound'
 import S5 from './containers/';
 import ListTable from './components/ListTable'
 import RequestForm from './components/RequestForm'
-import Data from './data/Requests'
+import Data from './etc/Data'
 
 import registerServiceWorker from './registerServiceWorker';
 const removeRequest = index => {
@@ -59,18 +60,7 @@ App.propTypes = {
     projectName: PropTypes.string
 }
 
-function reducer(state = {}, action) {
-    switch (action.type) {
-        case 'SAVE_GENERAL_LOGIN_INFO':
-            return 'save general login info';
-        case 'SAVE_ADMIN_LOGIN_INFO':
-            return 'save admin login info'
-        default:
-            return 'no data saved.'
-    }
-}
-
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 ReactDOM.render(
     <Provider store={store}>

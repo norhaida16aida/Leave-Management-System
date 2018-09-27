@@ -75,13 +75,15 @@ class AdminLogin extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {}
-}
+const mapStateToProps = (state, ownProps) => ({
+    user: state
+})
 
-function mapDispatchToProps(dispatch) {
-    return {}
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    getUser: () => {
+        dispatch()
+    }
+})
 
 export default connect(
     mapStateToProps,
