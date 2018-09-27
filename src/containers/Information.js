@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Route, Link} from 'react-router-dom'
-import RequestForm from '../step6/RequestForm'
-import ListTable from '../step6/ListTable'
+import RequestForm from '../components/RequestForm'
+import ListTable from '../components/ListTable'
 
 class Information extends Component {
     constructor(props) {

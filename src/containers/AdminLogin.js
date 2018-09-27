@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
 import './AdminLogin.css'
 
-export default class Admin extends Component {
+class AdminLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -73,3 +74,17 @@ export default class Admin extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {}
+}
+
+function mapDispatchToProps(dispatch) {
+    return {}
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AdminLogin);
+

@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import {Button, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
 import "./GeneralLogin.css";
 
-export default class Login extends Component {
+class GeneralLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -84,3 +85,17 @@ export default class Login extends Component {
         );
     }
 }
+
+
+function mapStateToProps(state) {
+    return {}
+}
+
+function mapDispatchToProps(dispatch) {
+    return {}
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps)
+(GeneralLogin);

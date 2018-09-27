@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
+import {createStore} from 'redux';
+import {Provider, connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import logo from './chinasofti_logo.png';
@@ -12,8 +16,8 @@ import Navigator from './components/Navigator'
 import Footer from './components/Footer'
 import NotFound from './components/NotFound'
 import S5 from './step5/';
-import ListTable from './step6/ListTable'
-import RequestForm from './step6/RequestForm'
+import ListTable from './components/ListTable'
+import RequestForm from './components/RequestForm'
 import Data from './step7/Data'
 
 import registerServiceWorker from './registerServiceWorker';
@@ -51,12 +55,28 @@ const App = () => (
         </div>
     </Router>
 )
+App.propTypes = {
+    projectName: PropTypes.string
+}
+
+function reducer(state = {}, action) {
+    switch (action.type) {
+        case 'SAVE_GENERAL_LOGIN_INFO':
+            return 'save general login info';
+        case 'SAVE_ADMIN_LOGIN_INFO':
+            return 'save admin login info'
+        default:
+            return 'no data saved.'
+    }
+    return 'walk through reducer'
+}
+
+const store = createStore(reducer);
 
 ReactDOM.render(
-    <div>
+    <Provider store={store}>
         <App/>
-    </div>
-    ,
+    </Provider>,
     document.getElementById('root')
 )
 
