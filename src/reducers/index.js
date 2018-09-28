@@ -1,24 +1,25 @@
 import {combineReducers} from 'redux'
 
-const getGeneralInfo = (state = [], action) => {
-    switch (action.type) {
-        case 'SAVE_GENERAL_LOGIN_INFO':
-            return 'save general login info';
-        default:
-            return 'no data saved.'
-    }
+const getGeneralInfo = (state = {}, action) => {
+  switch (action.type) {
+    case 'SAVE_GENERAL_LOGIN_INFO':
+      state = {...state, ...action.payload}
+      return state;
+    default:
+      return state;
+  }
 }
 
 const getAdminInfo = (state = {}, action) => {
-    switch (action.type) {
-        case 'SAVE_ADMIN_LOGIN_INFO':
-            return 'save admin login info'
-        default:
-            return 'no data saved.'
-    }
+  switch (action.type) {
+    case 'SAVE_ADMIN_LOGIN_INFO':
+      state = {...state, ...action.payload}
+    default:
+      return state;
+  }
 }
 
 export default combineReducers({
-    userInfo: getGeneralInfo,
-    adminIfo: getAdminInfo
+  user: getGeneralInfo,
+  admin: getAdminInfo
 });

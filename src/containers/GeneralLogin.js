@@ -1,99 +1,92 @@
 import React, {Component} from "react";
 import {Button, FormGroup, FormControl, ControlLabel} from "react-bootstrap";
 import {Redirect} from 'react-router-dom'
+import {bindActionCreators} from 'redux'
+import {addGeneralLoginUser} from '../actions'
 import {connect} from 'react-redux'
 import "./GeneralLogin.css";
 
 class GeneralLogin extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: "",
-            fireRedirect: false
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      fireRedirect: false
+    };
+  }
 
-    validateForm() {
-        return this.state.email.length > 0 && this.state.password.length > 0;
-    }
+  validateForm() {
+    return this.state.email.length > 0 && this.state.password.length > 0;
+  }
 
-    handleChange = event => {
-        this.setState({
-            [event.target.id]: event.target.value
-        });
-    }
+  handleChange = event => {
+    this.setState({
+      [event.target.id]: event.target.value
+    });
+  }
 
-    fetchData() {
-        fetch('/api/on_leave/customer_login', {
-            method: 'POST',
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(this.state)
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('data:', data)
-            })
-            .catch(e => {
-                throw new Error(e);
-            })
-    }
+  handleSubmit = event => {
+    event.preventDefault();
+    this.setState({fireRedirect: true});
+    this.props.addGeneralLoginUser({email: this.state.email});
+  }
 
-    handleSubmit = event => {
-        event.preventDefault();
-        this.setState({fireRedirect: true});
-        //Not work: return <Redirect to="/info"/>
-        console.log(JSON.stringify(this.state));
+  render() {
+    const {fireRedirect} = this.state;
+    const {user} = this.props;
+    if (fireRedirect) {
+      return <Redirect to="/info"/>
     }
-
-    render() {
-        const {fireRedirect} = this.state;
-        return (
-            <div>
-                {fireRedirect && (<Redirect to="/info"/>)}
-                <div className="Login">
-                    <h1>General User Login</h1>
-                    <form onSubmit={this.handleSubmit}>
-                        <FormGroup controlId="email" bsSize="large">
-                            <ControlLabel>Email</ControlLabel>
-                            <FormControl
-                                autoFocus
-                                type="email"
-                                value={this.state.email}
-                                onChange={this.handleChange}
-                            />
-                        </FormGroup>
-                        <FormGroup controlId="password" bsSize="large">
-                            <ControlLabel>Password</ControlLabel>
-                            <FormControl
-                                value={this.state.password}
-                                onChange={this.handleChange}
-                                type="password"
-                            />
-                        </FormGroup>
-                        <Button
-                            bsStyle="primary"
-                            block
-                            bsSize="large"
-                            disabled={!this.validateForm()}
-                            type="submit"
-                        >
-                            General Login
-                        </Button>
-                    </form>
-                </div>
-            </div>
-        );
-    }
+    return (
+      <div className="Login">
+        <h1>General User Login {user && user.email ? `[ ${user.email} ]` : ''}</h1>
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="email" bsSize="large">
+            <ControlLabel>Email</ControlLabel>
+            <FormControl
+              autoFocus
+              type="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <ControlLabel>Password</ControlLabel>
+            <FormControl
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+            />
+          </FormGroup>
+          <Button
+            bsStyle="primary"
+            block
+            bsSize="large"
+            disabled={!this.validateForm()}
+            type="submit"
+          >
+            General Login
+          </Button>
+        </form>
+      </div>
+    );
+  }
 }
 
 
-function mapStateToProps(state) {
-    return {}
+const mapStateToProps = (state) => ({
+  user: state.user
+})
+
+const mapDispatchToProps = (dispatch) => {
+  let actions = bindActionCreators({
+    addGeneralLoginUser
+  }, dispatch)
+  return {...actions, dispatch}
 }
 
-function mapDispatchToProps(dispatch) {
-    return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GeneralLogin);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GeneralLogin);
