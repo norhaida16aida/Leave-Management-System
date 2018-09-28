@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Chinasoft1111 Employee",
+    "fDate": "new Date().toDateString()",
+    "tDate": "new Date().toDateString()",
+    "reason": "Medical check",
+    "status": "Approved"
+  },
+  {
+    "name": "HSBC222 Employee",
+    "fDate": "new Date().toDateString()",
+    "tDate": "new Date().toDateString()",
+    "reason": "Technical Training",
+    "status": "Not Approved"
+  },
+  {
+    "name": "Chinasoft Employee",
+    "fDate": "new Date().toDateString()",
+    "tDate": "new Date().toDateString()",
+    "reason": "Medical check",
+    "status": "Approved"
+  },
+  {
+    "name": "HSBC Employee",
+    "fDate": "new Date().toDateString()",
+    "tDate": "new Date().toDateString()",
+    "reason": "Technical Training",
+    "status": "Not Approved"
+  }
+]

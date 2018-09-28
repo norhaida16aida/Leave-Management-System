@@ -2,6 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
+import {createStore, compose, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk'
+import {createLogger} from 'redux-logger'
+import {devToolsEnhancer} from 'redux-devtools-extension';
+
+import rootReducer from './reducers/'
+import {Provider} from 'react-redux';
+import PropTypes from 'prop-types';
+
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import logo from './chinasofti_logo.png';
@@ -11,10 +20,10 @@ import Home from './components/Home'
 import Navigator from './components/Navigator'
 import Footer from './components/Footer'
 import NotFound from './components/NotFound'
-import S5 from './step5/';
-import ListTable from './step6/ListTable'
-import RequestForm from './step6/RequestForm'
-import Data from './step7/Data'
+import S5 from './containers/';
+import ListTable from './components/ListTable'
+import RequestForm from './components/RequestForm'
+import Data from './etc/Data'
 
 import registerServiceWorker from './registerServiceWorker';
 const removeRequest = index => {
@@ -51,12 +60,20 @@ const App = () => (
         </div>
     </Router>
 )
+App.propTypes = {
+    projectName: PropTypes.string
+}
+
+const middlewares = [thunk, createLogger()];
+const store = createStore(
+    rootReducer,
+    compose(applyMiddleware(...middlewares), devToolsEnhancer())
+);
 
 ReactDOM.render(
-    <div>
+    <Provider store={store}>
         <App/>
-    </div>
-    ,
+    </Provider>,
     document.getElementById('root')
 )
 
